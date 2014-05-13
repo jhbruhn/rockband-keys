@@ -1,0 +1,58 @@
+#!/usr/bin/env node
+var path = require('path');
+var fs = require('fs');
+var program = require('commander');
+var _ = require('lodash');
+
+var lib = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
+var RockBandKeys = require(lib + '/rockband_keys.js');
+
+program
+	.version("0.0.0")
+	.option("-l, --list", 'List all connected Dongles.')
+	.option("-d, --dongle <n>", "Index of the dongle that should be used.", parseInt)
+	.parse(process.argv);
+
+var connectedDongles = RockBandKeys.getAvailableDevices();
+
+if(program.list) {
+	console.log("Connected Dongles:");
+	var i = 0;
+	_.each(connectedDongles, function(d) {
+		console.log("\t" + ++i + ": " + d.product + " (" + d.manufacturer+")");
+	});
+	process.exit(0);
+}
+
+var dongle = program.dongle;
+dongle++;
+
+if(dongle) {
+	var keyboard = new RockBandKeys(connectedDongles[program.dongle]);
+	console.log("The Keyboard is listening.");
+	keyboard.on("dpad", function(data) {
+		console.log("DPad " + data.name + " was " + (data.pressed ? "pressed." : "released."));
+	});
+	keyboard.on("button", function(data) {
+		console.log("Button " + data.name + " was " + (data.pressed ? "pressed." : "released."));
+	});
+	keyboard.on("touchOn", function(data) {
+		console.log("The Touch-Controller was pressed at " + data.value + ".");
+	});
+	keyboard.on("touchOff", function(data) {
+		console.log("The Touch-Controller was released.");
+	});
+	keyboard.on("touchButton", function(data) {
+		console.log("The Touch-Button was " + (data.pressed ? "pressed." : "released."));
+	});
+	keyboard.on("noteOn", function(data) {
+		console.log("The Note " + data.note + " was pressed with a velocity of " + data.velocity + ".");
+	});
+	keyboard.on("noteOff", function(data) {
+		console.log("The Note " + data.note + " was released.");
+	});
+
+	keyboard.start();
+} else {
+	console.log("Please specify a dongle via --dongle. See --help for more info.");
+}

@@ -1,0 +1,39 @@
+{
+  "name": "rockband-keys",
+  "version": "0.0.0",
+  "description": "A Library for communicating with a Rockband-Keytar-Receiver (currently Wii-only). Heavily based on https://github.com/nardi/rbkey-midi",
+  "main": "lib/rockband_keys.js",
+  "bin": {
+    "rbkeyslistener": "./bin/rbkeyslistener"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jhbruhn/rockband-keys.git"
+  },
+  "keywords": [
+    "rockband",
+    "keyboard",
+    "keys",
+    "rb",
+    "wii"
+  ],
+  "author": "Jan-Henrik Bruhn <jh.bruhn@me.com> (https://jhbruhn.de/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jhbruhn/rockband-keys/issues"
+  },
+  "homepage": "https://github.com/jhbruhn/rockband-keys",
+  "dependencies": {
+    "node-hid": "^0.3.1",
+    "lodash": "^2.4.1",
+    "commander": "^2.2.0"
+  },
+  "devDependencies": {
+    "onedox": "0.0.4",
+    "gulp": "^3.6.2",
+    "gulp-jsdoc": "^0.1.4"
+  }
+}
