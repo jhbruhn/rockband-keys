@@ -1,6 +1,6 @@
 {
   "name": "rockband-keys",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A Library for communicating with a Rockband-Keytar-Receiver (currently Wii-only). Heavily based on https://github.com/nardi/rbkey-midi",
   "main": "lib/rockband_keys.js",
   "bin": {
