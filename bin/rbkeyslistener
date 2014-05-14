@@ -5,8 +5,7 @@ var fs = require('fs');
 var program = require('commander');
 var _ = require('lodash');
 
-var lib = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
-var RockBandKeys = require(lib + '/rockband_keys.js');
+var RockBandKeys = require('../lib/rockband_keys.js');
 
 program
 	.version("0.0.0")
